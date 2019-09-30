@@ -1,0 +1,85 @@
+﻿<f:WindowBase x:Class="prbd_1819_g18.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:prbd_1819_g18"
+         xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+        mc:Ignorable="d"
+        Title="EPFC LIBRARY" Height="600.5" Width="836.5" >
+
+    <Grid>
+
+
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1*"/>
+
+
+
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="file" Command="{Binding File}" CommandParameter="TestDataGridReadOnly" ></MenuItem>
+            <MenuItem Header="Logout" Command="{Binding Logout}" CommandParameter="TestDataGridReadOnly" ></MenuItem>
+
+
+
+        </Menu>
+
+
+
+
+
+        <TabControl x:Name="tabControl" Margin="10" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+            <TabControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.186"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.747"/>
+                </TransformGroup>
+            </TabControl.RenderTransform>
+            <TabItem x:Name="bookTab" Header="BOOKS">
+                <ContentControl>
+                    <local:BookList/>
+                </ContentControl>
+
+            </TabItem>
+            <TabItem x:Name="catTab" Header="Categories">
+                <ContentControl>
+                    <local:Categories/>
+                </ContentControl>
+            </TabItem>
+            <TabItem x:Name="basketTab" Header="BASKET">
+                <ContentControl>
+                    <local:Basket/>
+                </ContentControl>
+            </TabItem>
+            <TabItem x:Name="rentalTab" Header="RENTAL">
+                <ContentControl>
+                    <local:RentalView/>
+                </ContentControl>
+            </TabItem>
+            <TabItem x:Name="RentalItemsByBook" Header="RentalItems By Book">
+                <ContentControl>
+                    <local:RentalItemsByBook/>
+                </ContentControl>
+            </TabItem>
+            <!--<TabItem x:Name="userTab" Header="USERS" Height="23" VerticalAlignment="Top">
+                <ContentControl>
+                    <local:UserList/>
+                </ContentControl>
+            </TabItem>-->
+        </TabControl>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+        </Grid>
+
+    </Grid>
+</f:WindowBase>

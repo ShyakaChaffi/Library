@@ -1,0 +1,65 @@
+﻿<f:UserControlBase x:Class="prbd_1819_g18.RentalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:prbd_1819_g18"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Rented, UpdateSourceTrigger=PropertyChanged}" Margin="152,70,163,247" 
+                                    AutoGenerateColumns="False" 
+                                    IsReadOnly="True"                                   
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding Selected}">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding SelectedBasket}"
+                                   CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="RentalDate"  Width="*" Binding="{Binding RentalDate}"/>
+                <DataGridTextColumn Header="User"  Width="*" Binding="{Binding User}"/>
+                <DataGridTextColumn Header="#Items"  Width="*" Binding="{Binding Items.Count}"/>
+                <DataGridTextColumn Header="#Open"  Width="*" Binding="{Binding NumOpenItems}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <DataGrid x:Name="ListItems" ItemsSource="{Binding RentedItem, UpdateSourceTrigger=PropertyChanged}" Margin="81,263,71,54" 
+                                    AutoGenerateColumns="False" 
+                                    IsReadOnly="True"                                   
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedItems}">
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Book"  Width="*" Binding="{Binding BookCopy}"/>
+                <DataGridTextColumn Header="Return Date"  Width="*" Binding="{Binding ReturnDate}"/>
+                <DataGridTemplateColumn Header="Actions"  Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Return" x:Name="Return" Visibility="{Binding ElementName=ListItems, Path=DataContext.Enable}" Command="{Binding ElementName=ListItems, Path=DataContext.Return}" CommandParameter="{Binding}" />
+                                <Button Content="Delete" x:Name="Cancel"  Visibility="{Binding ElementName=ListItems, Path=DataContext.Enable}" Command="{Binding ElementName=dataGrid, Path=DataContext.Delete}" CommandParameter="{Binding}"/>
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+
+    </Grid>
+</f:UserControlBase>

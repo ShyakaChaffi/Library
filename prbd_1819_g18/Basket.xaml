@@ -1,0 +1,49 @@
+﻿<f:UserControlBase
+    xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" x:Class="prbd_1819_g18.Basket"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:prbd_1819_g18"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBlock Text="This basket is for : " Visibility="{Binding Visibile}" Height="20" Margin="25,25,680,405"/>
+        <ComboBox ItemsSource="{Binding UserList}" Visibility="{Binding Visibile}" SelectedItem="{Binding UserSelected, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="20" Margin="125,25,525,405">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding UserBasketFilter}" CommandParameter="{Binding ElementName=ComboBox, Path=SelectedValue}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+
+        <Button Content="Confirm" Command="{Binding Confirm}" HorizontalAlignment="Left" Margin="45,300,0,0" VerticalAlignment="Top" Width="75" />
+        <Button Content="Clear" Command="{Binding Clear}" HorizontalAlignment="Left" Margin="180,300,0,0" VerticalAlignment="Top" Width="75"/>
+
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding RentalItems, UpdateSourceTrigger=PropertyChanged}" Margin="10,77,305,240" 
+                                    AutoGenerateColumns="False" 
+                                    IsReadOnly="True"                                   
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding Selected}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title"  Width="*" Binding="{Binding BookCopy}"/>
+                <DataGridTextColumn Header="Author"  Width="*" Binding="{Binding BookCopy.BookId.Author}"/>
+                <DataGridTemplateColumn Header="Actions"  Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete"  Command="{Binding ElementName=dataGrid, Path=DataContext.Delete}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</f:UserControlBase>

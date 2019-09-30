@@ -1,0 +1,40 @@
+﻿<f:UserControlBase
+    xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" x:Class="prbd_1819_g18.RentalItemsByBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:prbd_1819_g18"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="ListBook" ItemsSource="{Binding BookList}" Margin="0,0,554,1" SelectedItem="{Binding BookSelected}" SelectionMode="Single" >
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <CheckBox Content="{Binding Title}" Command="{Binding ElementName=ListBook, Path=DataContext.Change}" CommandParameter="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <DataGrid x:Name="ListItems" ItemsSource="{Binding RentalItemsSelected, UpdateSourceTrigger=PropertyChanged}" Margin="248,-1,-1,179" 
+                                    AutoGenerateColumns="False" 
+                                    IsReadOnly="True">
+
+
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Book"  Width="*" Binding="{Binding BookCopy}"/>
+                <DataGridTextColumn Header="Return Date"  Width="*" Binding="{Binding ReturnDate}"/>
+                <DataGridTextColumn Header="User"  Width="*" Binding="{Binding BookCopy.RentedBy}"/>
+
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</f:UserControlBase>
